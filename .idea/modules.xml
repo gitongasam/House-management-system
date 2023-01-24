@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/House-management-service/House-management-service.iml" filepath="$PROJECT_DIR$/House-management-service/House-management-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/House-management-system.iml" filepath="$PROJECT_DIR$/.idea/House-management-system.iml" />
+      <module fileurl="file://$PROJECT_DIR$/User-management-service/User-management-service.iml" filepath="$PROJECT_DIR$/User-management-service/User-management-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bookning-management-service/bookning-management-service.iml" filepath="$PROJECT_DIR$/bookning-management-service/bookning-management-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/payment-management-service/payment-management-service.iml" filepath="$PROJECT_DIR$/payment-management-service/payment-management-service.iml" />
+    </modules>
+  </component>
+</project>
