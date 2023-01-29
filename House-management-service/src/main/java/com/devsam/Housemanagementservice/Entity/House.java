@@ -16,7 +16,7 @@ public class House {
     private Long id;
     private String apartment;
     private String address;
-       private int bedrooms;
+    private String bedrooms;
     private double price;
 
 
