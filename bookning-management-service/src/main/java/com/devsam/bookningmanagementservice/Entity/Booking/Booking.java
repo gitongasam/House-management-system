@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "bookings")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,9 +18,8 @@ public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private User user;
-    private House house;
-    @Column(name = "start_date")
+
+
     private LocalDate startDate;
 
 }

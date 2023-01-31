@@ -1,12 +1,15 @@
 package com.devsam.Usermanagementservice.Entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import jakarta.persistence.*;
-import lombok.Data;
 
-@Data
+@Setter
+@Getter
 @Entity
-
 public class Role {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -14,4 +17,3 @@ public class Role {
     @Column(length = 60)
     private String name;
 }
-

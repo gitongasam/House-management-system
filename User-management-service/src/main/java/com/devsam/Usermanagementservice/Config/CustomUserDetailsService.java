@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-//first thing create this service
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
@@ -22,14 +21,11 @@ public class CustomUserDetailsService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
-
-
-
     @Override
-    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        User user = userRepository.findByUserName(userName)
+    public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
+        User user = userRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail)
                 .orElseThrow(() ->
-                        new UsernameNotFoundException("User not found with username or email: "+ userName ));
+                        new UsernameNotFoundException("User not found with username or email: "+ usernameOrEmail));
 
         Set<GrantedAuthority> authorities = user
                 .getRoles()
