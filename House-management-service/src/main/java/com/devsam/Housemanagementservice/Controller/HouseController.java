@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/houses")
+@RequestMapping("/house")
 public class HouseController {
     private final HouseService houseService;
 
@@ -19,7 +19,7 @@ public class HouseController {
         this.houseService = houseService;
     }
 
-    @GetMapping
+    @GetMapping("/find-all")
     public List<House> findAll() {
         return houseService.findAll();
     }
