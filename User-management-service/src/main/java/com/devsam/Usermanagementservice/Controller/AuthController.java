@@ -1,7 +1,6 @@
 package com.devsam.Usermanagementservice.Controller;
 
 import com.devsam.Usermanagementservice.Entity.LoginDto;
-import com.devsam.Usermanagementservice.Entity.Role;
 import com.devsam.Usermanagementservice.Entity.SignUpDto;
 import com.devsam.Usermanagementservice.Entity.User;
 import com.devsam.Usermanagementservice.Repository.RoleRepository;
@@ -16,7 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -71,8 +70,13 @@ public class AuthController {
         return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
 
     }
-    @GetMapping("find-By-id/{id}")
-    public User getById(@PathVariable Long id){
-        return userRepository.findById(id).get();
+    @GetMapping("find-by-usernameOrEmail/{usernameOrEmail}")
+    public User getById(@PathVariable String username,String email){
+        return userRepository.findByUsernameOrEmail(username,email).get();
+    }
+//    perfect
+    @GetMapping("/find-by-id/{id}")
+    public Optional<User> findById(@PathVariable("id") Long id){
+       return userRepository.findById(id);
     }
 }
