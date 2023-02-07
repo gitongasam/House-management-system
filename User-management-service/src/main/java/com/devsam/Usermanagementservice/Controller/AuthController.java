@@ -15,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -75,8 +76,12 @@ public class AuthController {
         return userRepository.findByUsernameOrEmail(username,email).get();
     }
 //    perfect
-    @GetMapping("/find-by-id/{id}")
+    @GetMapping("/{id}")
     public Optional<User> findById(@PathVariable("id") Long id){
        return userRepository.findById(id);
+    }
+    @GetMapping("/findall")
+    public List<User> findAll(){
+        return userRepository.findAll();
     }
 }

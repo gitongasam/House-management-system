@@ -1,5 +1,6 @@
 package com.devsam.Usermanagementservice.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import jakarta.persistence.*;
@@ -19,6 +20,7 @@ public class User {
     private String name;
     private String username;
     private String email;
+    @JsonIgnore
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

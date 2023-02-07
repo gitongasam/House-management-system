@@ -24,7 +24,7 @@ public class HouseController {
         return houseService.findAll();
     }
 
-    @GetMapping("/get-by-id/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<House> findById(@PathVariable Long id) {
         Optional<House> house = houseService.findById(id);
         if (house.isPresent()) {
