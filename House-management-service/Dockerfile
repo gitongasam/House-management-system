@@ -1,6 +1,7 @@
+
 FROM openjdk:19
-COPY target/*.jar app.jar
-ENTRYPOINT["java","-jar","/House-management-service.jar"]
-EXPOSE 8083
-ENTRYPOINT ["java", "-jar", "House-management-service.jar"]
+WORKDIR /app
+COPY target/House-management-service-0.0.1-SNAPSHOT.jar /app/House-management-service.jar
+CMD ["java", "-jar", "House-management-service.jar"]
+EXPOSE 8081
 

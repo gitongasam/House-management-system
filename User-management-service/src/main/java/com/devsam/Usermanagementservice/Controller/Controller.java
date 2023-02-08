@@ -20,7 +20,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/auth")
-public class AuthController {
+public class Controller {
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -33,7 +33,25 @@ public class AuthController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @PostMapping("/signup")
+    public ResponseEntity<?> registerUser(@RequestBody SignUpDto signUpDto){
 
+        if(userRepository.existsByUsername(signUpDto.getUsername())){
+            return new ResponseEntity<>("Username is already taken!", HttpStatus.BAD_REQUEST);
+        }
+        if(userRepository.existsByEmail(signUpDto.getEmail())){
+            return new ResponseEntity<>("Email is already taken!", HttpStatus.BAD_REQUEST);
+        }
+        User user = new User();
+        user.setName(signUpDto.getName());
+        user.setUsername(signUpDto.getUsername());
+        user.setEmail(signUpDto.getEmail());
+        user.setPassword(passwordEncoder.encode(signUpDto.getPassword()));
+        userRepository.save(user);
+
+        return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
+
+    }
     @PostMapping("/signin")
     public ResponseEntity<String> authenticateUser(@RequestBody LoginDto loginDto){
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
@@ -43,44 +61,17 @@ public class AuthController {
         return new ResponseEntity<>("User signed-in successfully!.", HttpStatus.OK);
     }
 
-    @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@RequestBody SignUpDto signUpDto){
 
-        // add check for username exists in a DB
-        if(userRepository.existsByUsername(signUpDto.getUsername())){
-            return new ResponseEntity<>("Username is already taken!", HttpStatus.BAD_REQUEST);
-        }
-
-        // add check for email exists in DB
-        if(userRepository.existsByEmail(signUpDto.getEmail())){
-            return new ResponseEntity<>("Email is already taken!", HttpStatus.BAD_REQUEST);
-        }
-
-        // create user object
-        User user = new User();
-        user.setName(signUpDto.getName());
-        user.setUsername(signUpDto.getUsername());
-        user.setEmail(signUpDto.getEmail());
-        user.setPassword(passwordEncoder.encode(signUpDto.getPassword()));
-
-//        Role roles = roleRepository.findByName("ROLE_ADMIN").get();
-//        user.setRoles(Collections.singleton(roles));
-
-        userRepository.save(user);
-
-        return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
-
-    }
     @GetMapping("find-by-usernameOrEmail/{usernameOrEmail}")
     public User getById(@PathVariable String username,String email){
         return userRepository.findByUsernameOrEmail(username,email).get();
     }
-//    perfect
+
     @GetMapping("/{id}")
     public Optional<User> findById(@PathVariable("id") Long id){
        return userRepository.findById(id);
     }
-    @GetMapping("/findall")
+    @GetMapping("/find-all")
     public List<User> findAll(){
         return userRepository.findAll();
     }

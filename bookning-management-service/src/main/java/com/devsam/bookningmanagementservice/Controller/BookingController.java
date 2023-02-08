@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 public class BookingController {
     @Autowired
     private BookingService bookingService;
-    @PostMapping("/")
+    @PostMapping("/save")
     public Booking saveBooking(@RequestBody Booking booking){
         return bookingService.saveBooking(booking);
     }

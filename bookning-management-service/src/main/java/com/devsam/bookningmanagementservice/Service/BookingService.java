@@ -25,8 +25,8 @@ public class BookingService {
     public ResponseTemplateVO getUserWithHouse(Long bookingId) {
         ResponseTemplateVO vo = new ResponseTemplateVO();
         Booking booking = bookingRepository.findByBookingId(bookingId);
-        House house = restTemplate.getForObject("http://localhost:8081/house/"+booking.getHouseId(), House.class);
-        User user = restTemplate.getForObject("http://localhost:8080/api/auth/"+booking.getUserId(), User.class);
+        House house = restTemplate.getForObject("http://HOUSE-SERVICE/house/"+booking.getHouseId(), House.class);
+        User user = restTemplate.getForObject("http://USER-SERVICE/api/auth/"+booking.getUserId(), User.class);
         vo.setUser(user);
         vo.setHouse(house);
         return vo;
