@@ -20,7 +20,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/auth")
-public class AuthController {
+public class Controller {
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -33,16 +33,6 @@ public class AuthController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-
-    @PostMapping("/signin")
-    public ResponseEntity<String> authenticateUser(@RequestBody LoginDto loginDto){
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                loginDto.getUsernameOrEmail(), loginDto.getPassword()));
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        return new ResponseEntity<>("User signed-in successfully!.", HttpStatus.OK);
-    }
-
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody SignUpDto signUpDto){
 
@@ -71,6 +61,16 @@ public class AuthController {
         return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
 
     }
+    @PostMapping("/signin")
+    public ResponseEntity<String> authenticateUser(@RequestBody LoginDto loginDto){
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                loginDto.getUsernameOrEmail(), loginDto.getPassword()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        return new ResponseEntity<>("User signed-in successfully!.", HttpStatus.OK);
+    }
+
+
     @GetMapping("find-by-usernameOrEmail/{usernameOrEmail}")
     public User getById(@PathVariable String username,String email){
         return userRepository.findByUsernameOrEmail(username,email).get();
@@ -80,7 +80,7 @@ public class AuthController {
     public Optional<User> findById(@PathVariable("id") Long id){
        return userRepository.findById(id);
     }
-    @GetMapping("/findall")
+    @GetMapping("/find-all")
     public List<User> findAll(){
         return userRepository.findAll();
     }
