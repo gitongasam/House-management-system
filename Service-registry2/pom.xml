@@ -12,7 +12,7 @@
 	<artifactId>Service-registry2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Service-registry2</name>
-	<description>service registry</description>
+	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>19</java.version>
 		<spring-cloud.version>2022.0.1</spring-cloud.version>
